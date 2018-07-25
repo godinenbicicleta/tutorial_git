@@ -1,0 +1,49 @@
+---------------
+Tutorial Git
+---------------
+
+Hay tres estados de trabajo en git:
+
+Local
+ 1. Working Directory 
+ 2. Staging area
+ 3. Commit
+Remoto
+ Bitbucket
+
+Configuracion:
+ a) user name
+    $ git config --global user.name "bruno carballo"
+ b) email   
+    $ git config --global user.email "bruno@descifra.mx"
+ c) editor
+    $ git config --global core.editor vim
+    $ git config --global core.editor "subl -n -w" (es necesario editar variables del sistema)
+
+ Para confirmar la configuración:
+    $ git config --global --list
+
+ .gitconfig
+  contiene toda la configuración de git
+
+To clone a repository:
+  git clone "paste here the repo url"
+
+Basic workflow:
+  1. Clone repository
+  2. Create a file: file.txt
+  3. Check status: git status
+  4. Add file.txt to staging area: git add file.txt, git status gives new file: file.txt
+  5. Commit to the local repository: git commit -m "Add my first file: file.txt"
+  6. git status gives ahead of origin/master
+  7. git push origin master (origin:GitHub copy of our repository, master: the default branch)
+
+To start a fresh project:
+  $ git init fresh-project (creates an empty folder/repository called fresh-project)
+  form inside an existing project:
+    $ git init
+
+To add all files to staging area:
+ $ git add .
+
+
