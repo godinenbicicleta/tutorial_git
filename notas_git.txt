@@ -111,6 +111,7 @@ If we delete using rm file the we need git add -A to add that change to staging 
 
 Git's History:
 git log gives us the history of our commits
+git log --abbrev-commit
 
 
 
