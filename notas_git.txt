@@ -132,4 +132,34 @@ to show the complete commit message, author, what changed, etc:
 to create an alias named hist:
  $ git config --global alias.hist "log --all --graph --oneline --decorate"   (note alias.alias_name)
 
+to ignore unwanted files create a .gitignore file in the repository
+ $ nano .gitignore
 
+.gitignore should have one pattern per line:
+  Myfile.txt        #ignores Myfile.txt
+  *.ext             # ignores all files ending with .ext
+  my-folder         # ignores everything iside my-folder/
+
+Comparing different "states" of a file:
+
+To show the differences between changes in working directory vs changes in staging area:
+ $ git diff
+
+To show differences between working directory and the last commit in the local repository
+ $ git diff HEAD
+
+To show differences between staging area and last commit in local repository:
+ $ git diff --staged HEAD
+
+To show only differences for one file (between working dir and staging area):
+ $ git diff -- README.md
+
+To show differences between commit git diff ref1 ref2, example:
+  $ git diff 1287r86t4khsdc HEAD (last commit vs commit with id 1287r86t4khsdc)
+  $ git diff HEAD HEAD^     (last commit vs last-1)
+  $ git diff commitID1  commitID2 (changes between two arbitrary commits)
+
+To show differences between local master branch and remote master branch:
+  $ git diff master origin/master    (compares local master vs remote master)
+
+Git doesn't allow to pull if you have changes in staging area that are yet to be commited
