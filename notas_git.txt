@@ -110,10 +110,26 @@ To recover a file that was deleted using git rm file but has not been commited
 If we delete using rm file the we need git add -A to add that change to staging area
 
 Git's History:
-git log gives us the history of our commits
-git log --abbrev-commit
+ $ git log gives us the history of our commits
+ $ git log --abbrev-commit
+ $ git log --oneline --graph --decorate
 
+to list only certain commits:
+ $ git log ae6f872...761b911
 
+to see only one file's history:
+ $ git log -- file
 
+to see from a certain day to the present:
+ $ git log --since="3 days ago"
+
+with --follow we can follow renames
+ $ git --follow file
+
+to show the complete commit message, author, what changed, etc:
+ $ git show b613ehbedkwbhcwy8vwbvudbwav78gerv
+
+to create an alias named hist:
+ $ git config --global alias.hist "log --all --graph --oneline --decorate"   (note alias.alias_name)
 
 
