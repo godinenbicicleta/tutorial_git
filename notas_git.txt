@@ -36,7 +36,7 @@ Basic workflow:
   4. Add file.txt to staging area: git add file.txt, git status gives new file: file.txt
   5. Commit to the local repository: git commit -m "Add my first file: file.txt"
   6. git status gives ahead of origin/master
-  7. git push origin master (origin:GitHub copy of our repository, master: the default branch)
+  7. git push origin master (origin:Bitbucket copy of our repository, master: the default branch)
 
 To start a fresh project:
   $ git init fresh-project (creates an empty folder/repository called fresh-project)
@@ -45,5 +45,74 @@ To start a fresh project:
 
 To add all files to staging area:
  $ git add .
+
+To clone an existing project:
+  $ cd /repos
+  $ git clone https://bitbucket...
+
+Basic workflow:
+  $ touch file.txt
+  $ git status
+  $ git add file.txt
+  $ git commit -m 'cambios'
+  $ git pull [origin] [master] (opcional pero es buena practica)
+  $ git push [origin] [master]
+
+It may be that not all files are being tracked, to list all files git is tracking:
+  $git ls-files
+
+What happens if I add a file and then make changes?
+think of add as adding changes:
+  $ touch prueba.txt
+  $ git add prueba.txt
+  $ echo 'hola' >> prueba.txt
+  $ git status shows changes untracked and changes to be commited
+  $ git add prueba
+  $ git commit
+
+Adding changes recursively.
+This is needed when we make changes inside a folder that is inside a folder that is...
+ $ git add .    #this will add all files recursively
+
+If I want to revert changes from a file:
+ $ touch hola.txt | git add hola.txt | git commit hola.txt
+ $ echo 'hola'>> hola.txt
+ $ git add hola.txt
+ $ git reset HEAD hola.txt    #removes hola.txt from staging area
+ $ git checkout -- hola.txt   #removes changes and returns file last commited
+
+Moving and copying files, be careful with renaming and changing at same time
+  $ git mv nombre.txt renombre.txt # renames a file
+  $ git add | git commit
+
+If we use only mv, git thinks you deleted and then created a new file, to save changes we need
+  $ git add -A
+this adds changes recursively but also updates all the files (renamed moved or deleted)
+
+Two git mv commands equals to doing nothing
+ $ git mv hola.txt holo.txt
+ $ git mv holo.txt hola.txt
+
+git mv cn be used both to rename and/or move
+
+git add -A = git add . + git add -u
+git add . = add all files (existing, modified and new but does not remove files that have been deleted)
+git add -u = adds currently tracked files only (which have been modified) to the staging area and checks if they have been deleted
+
+To delete files using git:
+  $ git rm file
+git rm only works if file is already being tracked so use rm instead
+
+To recover a file that was deleted using git rm file but has not been commited
+  $ git reset file
+  $ git checkout -- file
+
+If we delete using rm file the we need git add -A to add that change to staging area
+
+Git's History:
+git log gives us the history of our commits
+
+
+
 
 
