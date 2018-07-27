@@ -1,6 +1,11 @@
 ---------------
 Tutorial Git
 ---------------
+NOTA: USAR EJEMPLO DE ESCRIBIT UNA HISTORIA
+cada quien puede empezar con un repositorio para su historia
+probamos comandos sencillos para cambiar titulos, escibir los datos de portada
+despues usamos branches para crear un branch que sea la introducción y luego merge para ir construyendo la historia
+
 
 Hay tres estados de trabajo en git:
 
@@ -163,3 +168,106 @@ To show differences between local master branch and remote master branch:
   $ git diff master origin/master    (compares local master vs remote master)
 
 Git doesn't allow to pull if you have changes in staging area that are yet to be commited
+
+Working all the time in the master branch is not best practice
+The idea behing branches is to work on a branch for every particular feature and then merge to the master branch
+
+to list existing branches: 
+  $ git branch -a (list local and remote branch)
+
+to create new branch:
+  $ git branch mynewbranch
+
+to move to the new branch:
+  $ git checkout mynewbranch
+
+to see what happend:
+  $ git log --decorate --oneline
+
+to return to master: 
+  $ git checkout master
+
+to rename a branch:
+  $ git branch -m nombreviejo nombrenuevo
+
+to delete a branch:
+ $ git branch -d newbranch (need to be in a different branch)
+
+Branching and Merging
+To see only local branches
+ $ git branch
+
+To create a branch and chekout to it in the same command:
+  $ git checkout -b newfeature
+
+Workflow for creating a new branch, making changes and merging back to master branch:
+ 1. Suppose we have a text file story.txt with just a title in it and we make a branch to add an introduction
+    $ touch story.txt  (created file on master branch)
+    $ echo 'My git story'  >> story.txt (added title on master branch)
+    $ git status 8shows we have a new untracked file)
+    $ git add story.txt (to start tracking the file)
+    $ git commit -m 'Added story.txt with  title'   (changes saved to local repository)
+    $ git push (changes saved to remote repository)
+    $ git -b introduction    (created new branch to work on the introduction)
+    $ echo 'once upon a time...'>> cuento.txt
+    $ git status      (we can see story.txt has changed)
+    $ git add story.txt    (add changes on story.txt to staging area in introduction branch)
+    $ git commit -m 'added introduction'   (save changes to local repository, in introduction branch)
+    $ git log --decorate --oneline (we should see our branch is ahead of master and master origin)
+    $ git checkout master  (go back to master branch)
+  We should first see what are the differences between master branch and introduction branch by using diff
+    $ git diff master introduction
+  Having seen the differences between the two branches we proceed to merge:
+    $ git merge introduction
+  Git says it was a fast forward merge, this only happens when there are no changes in target branch  during the work in the other branch (introduction in this example) branch so it only adds the commits to the master branch as if the introduction branch was never created
+    
+   NOTA: HEAD is a reference to the last commit in the currently checked-out branch.
+
+   $ log --decorated --oneline --graph (to see current status, local master and introducion are ahead of remote origin master)
+  
+Since we have merged introduction with master branch, we can delete introduction, there is no point in keeping it:
+  $ git branch -d introduction
+
+If we want to disable fast forward to show explicitly that a branch was merged:
+ $ git merge introduction --no-ff (it shows as a merge commit, with it's corresponding message)
+
+Next step is to create a branch, make changes in that branch while also making changes to master branch and then merging
+ $ git branch -b chapt1
+make changes in chapt1, make changes in master 
+ $ git checkout master
+ $ git merge chapt1 -m 'commit message'
+ $ git log --oneline --decorate --graph --all (to see what happened)	
+
+MERGE CONFLICTS!!!
+Ahora si empieza el cagadero, what happens when git can't automatically merge branches?
+ 1. checkout new branch corregir_intro
+ 2. make changes in corregir intro (add an commit)
+ 3. checkout master
+ 4. make changes in master to same file, wee need conflicts! (add and commit)
+ 4.5 $ git log --decorate --online 
+ 4.6 $ git diff master corregir_intro
+ 5. git merge corregir-intro
+!!! MERGE CONFLICTS¡¡¡ git tries and fails to merge
+We are now in a merging state, we need to edit the file to resolve conflicts, save it , add changes to staging area and commit changes
+git will save a copy .orig of merge conflict
+
+we should add *.orig to .gitignore
+
+delete branch
+
+
+Once we have a clean working directory and want to push to origin master:
+1. verify we are in branch master 
+  $ git branch
+2. see if there are any changes in origin master 
+  $ git pull
+3. push changes 
+  $ git push origin master
+
+Advanced topics not covered this time:
+ Rebase: If you area working in a branch while master undergoes changes, you use rebase to pull changes from master into your branch so you keep working on top of it
+ Stashing: you can 
+
+ 
+
+
