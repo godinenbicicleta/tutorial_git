@@ -4,4 +4,4 @@ En la branch de practica estoy agregando una nueva linea al archivo
 
 agrego una segunda linea para hacer merge sin ff
 
-esta linea la estoy agregando desde master despues del cambio que se hizo en simple-changes
+esta linea la estoy desd una coloa  master despues del cambio que se hizo en simple-changes
